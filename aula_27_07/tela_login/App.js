@@ -58,9 +58,11 @@ export default function App() {
 
       <TouchableOpacity style={styles.botao}>
 
-        <Text style={styles.textoBotao}>
-          Entrar
-        </Text>
+        <Button
+        title={loading ? 'Entrando...' : 'Entrar'}
+        onPress={() => setLoading(true)}
+        disabled={loading}
+      />
 
       </TouchableOpacity>
 
