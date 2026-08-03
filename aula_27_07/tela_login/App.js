@@ -1,60 +1,141 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, ScrollView, Image, TextInput, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 
 export default function App() {
-  const [loading, setLoading] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
+
+      <StatusBar style="light" />
+
       <Image
         source={{
-          uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+          uri: "https://reactnative.dev/img/tiny_logo.png",
         }}
-        style={{ width: 200, height: 200 }}
+        style={styles.logo}
       />
 
-      <Text>Digite seu email cadastrado:</Text>
+      <Text style={styles.titulo}>Bem-vindo!</Text>
+
+      <Text style={styles.subtitulo}>
+        Faça login para continuar
+      </Text>
 
       <TextInput
-        defaultValue="email@gmail.com"
         style={styles.input}
+        placeholder="Digite seu e-mail"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
       />
 
-      <Text>Digite sua senha cadastrada:</Text>
-
       <TextInput
-        defaultValue="senha123#"
         style={styles.input}
+        placeholder="Digite sua senha"
         secureTextEntry
+        value={senha}
+        onChangeText={setSenha}
       />
 
-      <Button
-        title={loading ? 'Entrando...' : 'Entrar'}
-        onPress={() => setLoading(true)}
-        disabled={loading}
-      />
+      <TouchableOpacity>
 
-      <StatusBar style="auto" />
-    </ScrollView>
+        <Text style={styles.esqueciSenha}>
+          Esqueci minha senha
+        </Text>
+
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botao}>
+
+        <Text style={styles.textoBotao}>
+          Entrar
+        </Text>
+
+      </TouchableOpacity>
+
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 20,
+    flex: 1,
+    backgroundColor: "#0A2B71",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 30,
+  },
+
+  logo: {
+    width: 110,
+    height: 110,
+    marginBottom: 25,
+  },
+
+  titulo: {
+    color: "#FFFFFF",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+
+  subtitulo: {
+    color: "#D9D9D9",
+    marginBottom: 40,
+    fontSize: 16,
   },
 
   input: {
-    width: '80%',
-    borderWidth: 1,
-    borderColor: '#999',
-    padding: 10,
-    marginBottom: 15,
-    borderRadius: 5,
+    width: "100%",
+    height: 55,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    marginBottom: 18,
+    fontSize: 16,
+
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
   },
+
+  esqueciSenha: {
+    color: "#BFD4FF",
+    marginBottom: 30,
+    fontSize: 14,
+    alignSelf: "flex-end",
+  },
+
+  botao: {
+    width: "100%",
+    height: 55,
+    backgroundColor: "#2A61D7",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+
+  textoBotao: {
+    color: "#FFF",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
 });
