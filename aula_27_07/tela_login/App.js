@@ -7,7 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  Button
+  Button,
 } from 'react-native';
 
 export default function App() {
@@ -50,22 +50,18 @@ export default function App() {
       />
 
       <TouchableOpacity>
-
         <Text style={styles.esqueciSenha}>
           Esqueci minha senha
         </Text>
-
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.botao}>
-
+      <View style={styles.botao}>
         <Button
-        title={loading ? 'Entrando...' : 'Entrar'}
-        onPress={() => setLoading(true)}
-        disabled={loading}
-      />
-
-      </TouchableOpacity>
+          title="Entrar"
+          color="#2A61D7"
+          onPress={() => alert("Login realizado!")}
+        />
+      </View>
 
     </View>
   );
@@ -107,7 +103,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 18,
     fontSize: 16,
-
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 5,
@@ -123,22 +118,8 @@ const styles = StyleSheet.create({
 
   botao: {
     width: "100%",
-    height: 55,
-    backgroundColor: "#2A61D7",
     borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-
-    shadowColor: "#000",
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-
-  textoBotao: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "bold",
+    overflow: "hidden",
   },
 
 });
