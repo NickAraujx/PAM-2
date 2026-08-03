@@ -1,27 +1,36 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, Image, TextInput, Button } from 'react-native';
 
 export default function App() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <ScrollView style={styles.container}>
-
+    <ScrollView contentContainerStyle={styles.container}>
       <Image
-          source={{
-            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-          }}
-          style={{width: 200, height: 200}}
-        />
+        source={{
+          uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+        }}
+        style={{ width: 200, height: 200 }}
+      />
 
       <Text>Digite seu email cadastrado:</Text>
-      <TextInput defaultValue="email@gmail.com" ></TextInput>
+
+      <TextInput
+        defaultValue="email@gmail.com"
+        style={styles.input}
+      />
 
       <Text>Digite sua senha cadastrada:</Text>
-      <TextInput defaultValue="senha123#" ></TextInput>
+
+      <TextInput
+        defaultValue="senha123#"
+        style={styles.input}
+        secureTextEntry
+      />
 
       <Button
-        title={loading ? "Entrar" : "Entrando..."}
+        title={loading ? 'Entrando...' : 'Entrar'}
         onPress={() => setLoading(true)}
         disabled={loading}
       />
