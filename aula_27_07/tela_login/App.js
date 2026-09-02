@@ -24,3 +24,34 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default function Home({ navigation }) {
+
+    const usuarios = [
+        { id: '1', nome: 'Laranjo Irritante' },
+        { id: '2', nome: 'Bananilson Farofa' },
+        { id: '3', nome: 'João Burro Animal da Cleire' },
+        { id: '4', nome: 'Cleire Dona do Burro Animal João' },
+        { id: '5', nome: 'Kadu da Jocileine BumBum Granada' },
+    ];
+
+    return (
+        <View style={styles.container}>
+
+            <Text style={styles.titulo}>Bem-vindo!</Text>
+
+            <Text style={styles.subtitulo}>Lista de usuários:</Text>
+
+            <FlatList
+                data={usuarios}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View style={styles.item}>
+                        <Text style={styles.nome}>{item.nome}</Text>
+                    </View>
+                )}
+            />
+
+        </View>
+    );
+}
