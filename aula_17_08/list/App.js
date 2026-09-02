@@ -4,7 +4,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 export default function App() {
 
     const jogos = [
-        { id: '1', nome: 'Minecraft', genero: 'Aventura' },
+        { id: '1', nome: 'Red Dead Redemption 2', genero: 'Aventura' },
         { id: '2', nome: 'GTA V', genero: 'Ação' },
         { id: '3', nome: 'FIFA 26', genero: 'Esportes' },
         { id: '4', nome: 'Fortnite', genero: 'Battle Royale' },
