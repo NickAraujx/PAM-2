@@ -1,125 +1,102 @@
-import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+
 import {
-  StyleSheet,
-  Text,
   View,
-  Image,
+  Text,
   TextInput,
   TouchableOpacity,
-  Button,
+  StyleSheet
 } from 'react-native';
+
 
 export default function Login({ navigation }) {
 
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-
   return (
+
     <View style={styles.container}>
 
-      <StatusBar style="light" />
+      <Text style={styles.titulo}>
+        Login
+      </Text>
 
-      <Image
-        source={{
-          uri: "https://reactnative.dev/img/tiny_logo.png",
-        }}
-        style={styles.logo}
-      />
-
-      <Text style={styles.titulo}>Bem-vindo!</Text>
-
-      <Text style={styles.subtitulo}>
-        Faça login para continuar
+      <Text style={styles.texto}>
+        Digite seu e-mail
       </Text>
 
       <TextInput
         style={styles.input}
         placeholder="Digite seu e-mail"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
       />
+
+      <Text style={styles.texto}>
+        Senha
+      </Text>
 
       <TextInput
         style={styles.input}
         placeholder="Digite sua senha"
         secureTextEntry
-        value={senha}
-        onChangeText={setSenha}
       />
 
-      <TouchableOpacity>
-        <Text style={styles.esqueciSenha}>
-          Esqueci minha senha
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() => navigation.navigate('Home')}
+      >
+
+        <Text style={styles.textoBotao}>
+          Entrar
         </Text>
+
       </TouchableOpacity>
 
-      <View style={styles.botao}>
-        <Button
-          title="Entrar"
-          color="#2A61D7"
-          onPress={() => navigation.navigate('Home')}
-        />
-      </View>
-
     </View>
+
   );
+
 }
+
 
 const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#0A2B71",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 30,
-  },
-
-  logo: {
-    width: 110,
-    height: 110,
-    marginBottom: 25,
+    padding: 20,
+    justifyContent: 'center'
   },
 
   titulo: {
-    color: "#FFFFFF",
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
   },
 
-  subtitulo: {
-    color: "#D9D9D9",
-    marginBottom: 40,
+  texto: {
     fontSize: 16,
+    marginBottom: 5
   },
 
   input: {
-    width: "100%",
-    height: 55,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    paddingHorizontal: 15,
-    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: '#999',
+    borderRadius: 8,
+    padding: 12,
     fontSize: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-
-  esqueciSenha: {
-    color: "#BFD4FF",
-    marginBottom: 30,
-    fontSize: 14,
-    alignSelf: "flex-end",
+    marginBottom: 15
   },
 
   botao: {
-    width: "100%",
-    borderRadius: 12,
-    overflow: "hidden",
+    backgroundColor: '#007AFF',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10
   },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 
 });

@@ -1,146 +1,216 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import {
   View,
   Text,
-  StyleSheet,
-  Image,
-  ScrollView,
+  TextInput,
   TouchableOpacity,
+  FlatList,
+  StyleSheet
 } from 'react-native';
 
+
 export default function Home() {
+
+  const [tarefa, setTarefa] = useState('');
+  const [tarefas, setTarefas] = useState([]);
+
+
+  function adicionarTarefa() {
+
+    if (tarefa.trim() === '') {
+      return;
+    }
+
+    const novaTarefa = {
+      id: Date.now().toString(),
+      nome: tarefa,
+      concluida: false
+    };
+
+    setTarefas([...tarefas, novaTarefa]);
+
+    setTarefa('');
+  }
+
+
+  function concluirTarefa(id) {
+
+    const listaAtualizada = tarefas.map(item => {
+
+      if (item.id === id) {
+
+        return {
+          ...item,
+          concluida: !item.concluida
+        };
+
+      }
+
+      return item;
+    });
+
+    setTarefas(listaAtualizada);
+  }
+
+
+  function limparTarefas() {
+
+    setTarefas([]);
+
+  }
+
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
 
-      <Text style={styles.titulo}>React Native</Text>
+    <View style={styles.container}>
 
-      <Text style={styles.subtitulo}>
-        Desenvolva aplicativos Android e iOS utilizando JavaScript e React.
+      <Text style={styles.titulo}>
+        Minha Lista
       </Text>
 
-      <Image
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
-        style={styles.logo}
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite uma tarefa"
+        value={tarefa}
+        onChangeText={setTarefa}
       />
 
-      <Text style={styles.tituloSecao}>Principais Recursos</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitulo}>⚡ Alta Performance</Text>
-        <Text style={styles.cardTexto}>
-          Aplicativos rápidos com componentes nativos.
-        </Text>
-      </View>
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={adicionarTarefa}
+      >
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitulo}>📱 Multiplataforma</Text>
-        <Text style={styles.cardTexto}>
-          Um único código para Android e iOS.
-        </Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.cardTitulo}>🚀 Hot Reload</Text>
-        <Text style={styles.cardTexto}>
-          Veja as alterações em tempo real durante o desenvolvimento.
-        </Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.cardTitulo}>💙 Comunidade</Text>
-        <Text style={styles.cardTexto}>
-          Milhares de bibliotecas e uma comunidade ativa.
-        </Text>
-      </View>
-
-      <TouchableOpacity style={styles.botao}>
         <Text style={styles.textoBotao}>
-          Começar a Desenvolver
+          Adicionar
         </Text>
+
       </TouchableOpacity>
 
-    </ScrollView>
+
+      <Text style={styles.contador}>
+        Tarefas: {tarefas.length}
+      </Text>
+
+
+      <FlatList
+        data={tarefas}
+
+        keyExtractor={(item) => item.id}
+
+        renderItem={({ item }) => (
+
+          <TouchableOpacity
+            style={styles.tarefa}
+            onPress={() => concluirTarefa(item.id)}
+          >
+
+            <Text
+              style={
+                item.concluida
+                  ? styles.tarefaConcluida
+                  : styles.tarefaTexto
+              }
+            >
+
+              {item.concluida ? '✓ ' : '○ '}
+
+              {item.nome}
+
+            </Text>
+
+          </TouchableOpacity>
+
+        )}
+      />
+
+
+      <TouchableOpacity
+        style={styles.botaoLimpar}
+        onPress={limparTarefas}
+      >
+
+        <Text style={styles.textoBotao}>
+          Limpar tarefas
+        </Text>
+
+      </TouchableOpacity>
+
+    </View>
+
   );
+
 }
+
 
 const styles = StyleSheet.create({
 
   container: {
-    flexGrow: 1,
-    backgroundColor: '#F4F8FF',
-    alignItems: 'center',
+    flex: 1,
     padding: 20,
+    paddingTop: 60
   },
 
   titulo: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#0A2B71',
-    marginTop: 20,
+    marginBottom: 25,
+    textAlign: 'center'
   },
 
-  subtitulo: {
-    textAlign: 'center',
+  input: {
+    borderWidth: 1,
+    borderColor: '#999',
+    borderRadius: 8,
+    padding: 12,
     fontSize: 16,
-    color: '#555',
-    marginTop: 10,
-    marginBottom: 25,
-  },
-
-  logo: {
-    width: 120,
-    height: 120,
-    marginBottom: 25,
-  },
-
-  tituloSecao: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#2A61D7',
-    alignSelf: 'flex-start',
-    marginBottom: 15,
-  },
-
-  card: {
-    width: '100%',
-    backgroundColor: '#FFFFFF',
-    padding: 18,
-    borderRadius: 15,
-    marginBottom: 15,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-  },
-
-  cardTitulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#0A2B71',
-    marginBottom: 8,
-  },
-
-  cardTexto: {
-    fontSize: 15,
-    color: '#555',
+    marginBottom: 10
   },
 
   botao: {
-    width: '100%',
-    backgroundColor: '#2A61D7',
-    padding: 18,
-    borderRadius: 12,
-    marginTop: 20,
-    marginBottom: 30,
+    backgroundColor: '#007AFF',
+    padding: 14,
+    borderRadius: 8,
     alignItems: 'center',
+    marginBottom: 15
+  },
+
+  botaoLimpar: {
+    backgroundColor: '#555',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 15
   },
 
   textoBotao: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
   },
+
+  contador: {
+    fontSize: 18,
+    marginBottom: 10
+  },
+
+  tarefa: {
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    marginBottom: 8
+  },
+
+  tarefaTexto: {
+    fontSize: 17
+  },
+
+  tarefaConcluida: {
+    fontSize: 17,
+    textDecorationLine: 'line-through'
+  }
 
 });
