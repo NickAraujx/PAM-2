@@ -6,7 +6,8 @@ import {
   Button,
   ScrollView,
   FlatList,
-  View
+  View,
+  Pressable
 } from 'react-native';
 
 import styles from '../styles/styles';
@@ -30,6 +31,10 @@ export default function Tarefas() {
 
       setTarefa('');
     }
+  }
+
+  function removerTarefa(id) {
+    setTarefas(tarefasAtuais => tarefasAtuais.filter(item => item.id !== id));
   }
 
   return (
@@ -66,6 +71,15 @@ export default function Tarefas() {
             <Text style={styles.itemTexto}>
               • {item.nome}
             </Text>
+
+            <Pressable
+              style={styles.botaoRemover}
+              onPress={() => removerTarefa(item.id)}
+              accessibilityRole="button"
+              accessibilityLabel={`Remover tarefa ${item.nome}`}
+            >
+              <Text style={styles.botaoRemoverTexto}>X</Text>
+            </Pressable>
 
           </View>
 

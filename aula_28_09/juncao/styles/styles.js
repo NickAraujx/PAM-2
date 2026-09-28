@@ -50,11 +50,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 8,
-    marginBottom: 10
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   itemTexto: {
-    fontSize: 17
+    fontSize: 17,
+    flex: 1,
+    marginRight: 12
+  },
+
+  botaoRemover: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#d32f2f'
+  },
+
+  botaoRemoverTexto: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 
 });
